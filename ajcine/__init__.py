@@ -1,4 +1,4 @@
 
-from .brand import PRODUCT, COMPANY, DEVELOPER, VERSION
+from .brand import PRODUCT, VERSION
 
 __all__ = ["PRODUCT", "VERSION"]
