@@ -129,7 +129,7 @@ def register_handlers(app: App, bot: Any, user_client: Any | None = None) -> Non
         try:
             miss = await app.delivery.missing_subscriptions(client, uid) if s.force_sub_channels else []
             if miss:
-                rows = [[(f"Join {c}", "url:https://t.me/" + c.lstrip("@"))] for c in miss if not c.lstrip("-").isdigit()]
+                rows = [[(f"Join {c}", "url:https://t.me/ajapplications_tg")] for c in miss if not c.lstrip("-").isdigit()]
                 rows.append([("I joined — try again", "url:https://t.me/" + await username() + "?start=dl_" + token)])
                 return await msg.reply_text("Please join the required channel(s) first, then try again.",
                                             reply_markup=to_markup(rows))
