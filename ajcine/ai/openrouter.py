@@ -1,17 +1,4 @@
-"""OpenRouter gateway restricted to FREE models.
 
-Guarantees:
-  * a model is only ever called if it is verified free (zero prompt+completion
-    pricing in the live catalogue, or - if the catalogue is unreachable - its
-    id ends with ":free");
-  * the native OpenRouter `models` fallback array is never sent (it can route
-    to paid models); fallbacks are tried by this client, one verified-free
-    model at a time;
-  * free-tier limits (20 req/min, 50 or 1000 req/day) are respected with a
-    local throttle, Retry-After handling, exponential backoff and circuit
-    breakers;
-  * results are cached so the same input never costs a second request.
-"""
 from __future__ import annotations
 
 import asyncio

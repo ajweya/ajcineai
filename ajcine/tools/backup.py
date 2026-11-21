@@ -1,12 +1,4 @@
-"""Backup and restore of the MongoDB catalog (gzip'd extended-JSON).
 
-CLI:
-    python -m ajcine.tools.backup create            # write data/backups/ajcine-<ts>.json.gz
-    python -m ajcine.tools.backup restore FILE      # restore (replaces listed collections)
-
-Excluded on purpose: web sessions, delivery tokens and caches (ephemeral/secret).
-Admin password hashes ARE included: treat backup files as secrets.
-"""
 from __future__ import annotations
 
 import asyncio

@@ -1,9 +1,4 @@
-"""IMDb candidate model and the weighted matching engine.
 
-The engine never trusts a single signal. A title is only auto-approved when
-the text similarity is strong AND the year/type agree AND no equally good
-rival exists. Everything else is routed to the human review queue.
-"""
 from __future__ import annotations
 
 import math

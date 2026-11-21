@@ -1,14 +1,4 @@
-"""Title lookup through the TMDB API (no local database, nothing to download or import).
 
-Search runs against TMDB's movie and TV endpoints; the best few results are then fetched in detail
-(genres, runtime, alternative titles and, importantly, the external IMDb id). Catalog ids stay the IMDb id
-("tt1375666") because TMDB reports it for almost every title; a result TMDB has no IMDb id for is not offered,
-so a file for such a title goes to the review queue (where it can be saved as a local title) instead of being
-guessed. Ratings and vote counts are TMDB's.
-
-This product uses the TMDB API but is not endorsed or certified by TMDB.
-Lookups are cached in MongoDB (`title_cache`, expires after 30 days; TMDB asks that cached data stay current).
-"""
 from __future__ import annotations
 
 import hashlib

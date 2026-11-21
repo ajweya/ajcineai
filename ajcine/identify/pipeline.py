@@ -1,16 +1,4 @@
-"""Identification pipeline.
 
-Order (cheapest and most trustworthy first):
-  1. manual corrections   (always win)
-  2. deterministic parse  (+ caption merge)
-  3. TMDB match           (TMDB search + details, weighted scoring)
-  4. AI normalisation     (OpenRouter free models) -> TMDB match again
-  5. human review queue   (anything not confidently verified)
-
-An AI guess is *never* approved by itself: it only supplies better search
-text. The accepted identification is always a TMDB candidate (carrying its IMDb id) that passed the
-scoring thresholds.
-"""
 from __future__ import annotations
 
 import logging

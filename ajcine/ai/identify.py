@@ -1,9 +1,4 @@
-"""AI-assisted normalization with strict validation.
 
-The model only *normalizes text* (title, year, season...). It is never trusted
-for IMDb ids, ratings or any catalogue fact: those fields are rejected, and
-every AI title must still be confirmed by a TMDB lookup.
-"""
 from __future__ import annotations
 
 import json

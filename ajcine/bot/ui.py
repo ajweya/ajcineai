@@ -1,26 +1,4 @@
-"""Pure view-layer helpers: text and keyboard *data* for search/navigation.
 
-Keyboards are returned as plain lists of (text, callback_data|url) rows so the
-logic is testable without Telegram. `to_markup` converts them for Pyrogram.
-
-Callback data is compact and validated (Telegram limits it to 64 bytes):
-  t:<id>                      open title
-  l:<id>:<lang>               pick language          (movies)
-  q:<id>:<lang>:<quality>     pick quality -> private delivery
-  s:<id>                      list seasons
-  n:<id>:<season>             list episodes of a season
-  e:<id>:<season>:<ep>        episode -> languages
-  el:<id>:<s>:<ep>:<lang>     episode language -> qualities
-  eq:<id>:<s>:<ep>:<l>:<q>    episode quality -> delivery
-  sp:<id>:<season>            season pack -> languages
-  cp:<id>                     complete-series pack -> languages
-  pl:<id>:<kind>:<s>:<lang>   pack language -> qualities
-  pq:<id>:<kind>:<s>:<l>:<q>  pack quality -> delivery
-  p:<n>:<token>               search results page (token = cached query key)
-  r:<token>                   back to results
-  w:<id>                      add/remove a title in My list
-  rq:<token>                  request a title that was not found
-"""
 from __future__ import annotations
 
 import html

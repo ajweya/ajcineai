@@ -1,4 +1,4 @@
-"""Text normalization shared by parsing, matching and search."""
+
 from __future__ import annotations
 
 import re

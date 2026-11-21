@@ -1,10 +1,4 @@
-"""Button-driven Telegram administrator panel.
 
-Entry: the "Admin panel" button on the start menu (shown to admins only).
-Every callback re-checks the caller's role; callback data is validated.
-Free-text input (adding a source, searching titles...) uses a short-lived
-conversational state kept in the cache.
-"""
 from __future__ import annotations
 
 import logging

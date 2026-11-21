@@ -1,12 +1,4 @@
-"""Deterministic release-filename parser (first stage of identification).
 
-Pure string work, no network. The AI layer is only consulted when this stage
-plus TMDB matching cannot produce a confident, verified identification.
-
-Design reference: the "boundary first, lists last" approach used by the MIT
-licensed muse-tg-media-search-bot parser (Saurav Rebhankar). This is an
-independent implementation.
-"""
 from __future__ import annotations
 
 import os

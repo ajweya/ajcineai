@@ -1,15 +1,4 @@
-"""Collection maintenance and reporting.
 
-    python -m ajcine.tools.collections report [--id ID] [--kind movie|series] [--json]
-    python -m ajcine.tools.collections migrate [--apply]
-
-`migrate` is a dry run unless --apply is given. It never deletes files: it (1) links every file to its
-collection (`collection_id`), (2) stores the normalised `match_key` on titles, and (3) merges local (`loc_`)
-collections that are really the same movie/series (same normalised title; a missing year is compatible with
-a known year) into the oldest/largest one, keeping that collection's existing id.
-
-Developed by AJ APPLICATIONS · Developer: AJWEYA
-"""
 from __future__ import annotations
 
 import argparse

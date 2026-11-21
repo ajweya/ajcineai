@@ -1,14 +1,4 @@
-"""Telegram indexing: sources, resumable history scans, live indexing.
 
-Nothing is downloaded: only message references and Telegram file identifiers
-are stored. Progress is checkpointed after every batch, so a restart resumes
-where it stopped. Long scans run as background tasks and never block update
-handling.
-
-Access: history scanning uses `get_messages` by ID range, which works for a
-bot that is an admin/member of the source channel (and for user sessions).
-Only index sources you are authorized to distribute from.
-"""
 from __future__ import annotations
 
 import asyncio
@@ -23,7 +13,7 @@ from ..config import Settings
 from ..identify.pipeline import IdentificationPipeline
 from ..parsing.parser import ARCHIVE_EXTS, AUDIO_EXTS, VIDEO_EXTS
 
-try:  # Telegram libs are optional for unit tests
+try: 
     from pyrogram.errors import FloodWait
 except Exception:  # pragma: no cover
     class FloodWait(Exception):  # type: ignore

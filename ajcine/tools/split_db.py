@@ -1,15 +1,4 @@
-"""Copy an existing single-database install into the per-role databases.
 
-    python -m ajcine.tools.split_db            # dry run: shows what would be copied
-    python -m ajcine.tools.split_db --apply    # copy (idempotent; the source is never modified or deleted)
-
-Configure the new MONGO_CATALOG_URI / MONGO_FILES_URI / MONGO_USERS_URI / MONGO_ACTIVITY_URI (and *_DB) first.
-The source is the database named by MONGO_URI / MONGO_DB (override with --source-uri / --source-db). Collections whose
-role database is the source itself are skipped. After checking the counts, restart the app; delete the old copies
-yourself when you are satisfied.
-
-Developed by AJ APPLICATIONS · Developer: AJWEYA
-"""
 from __future__ import annotations
 
 import argparse

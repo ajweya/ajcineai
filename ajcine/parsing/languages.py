@@ -1,4 +1,3 @@
-"""Language vocabulary and detection for release names and captions."""
 from __future__ import annotations
 
 import re
