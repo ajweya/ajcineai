@@ -1,4 +1,8 @@
+"""Telegram client creation and user-facing handlers.
 
+All user interaction is button-driven. The only command is /start (which also
+carries delivery deep links). Admin features live in `admin.py`.
+"""
 from __future__ import annotations
 
 import functools
@@ -77,6 +81,82 @@ async def edit_view(cb_or_msg: Any, text: str, rows: list, photo: str | None = N
             raise
 
 
+def _private_force_sub_links() -> dict[str, str]:
+    """Read private-channel invite links from AJ_FORCE_SUB_INVITE_LINKS JSON.
+
+    Example:
+      AJ_FORCE_SUB_INVITE_LINKS={"-1001234567890":"https://t.me/+inviteCode"}
+
+    Keys are Telegram channel IDs. Values must be the actual invite URLs.
+    """
+    import json
+
+    raw = os.getenv("AJ_FORCE_SUB_INVITE_LINKS", "{}").strip()
+    if not raw:
+        return {}
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        log.error("AJ_FORCE_SUB_INVITE_LINKS must contain valid JSON")
+        return {}
+    if not isinstance(data, dict):
+        log.error("AJ_FORCE_SUB_INVITE_LINKS must be a JSON object")
+        return {}
+
+    links: dict[str, str] = {}
+    for channel_id, invite_url in data.items():
+        channel_id = str(channel_id).strip()
+        invite_url = str(invite_url).strip()
+        if channel_id and invite_url.startswith(("https://t.me/+", "https://t.me/joinchat/")):
+            links[channel_id] = invite_url
+        else:
+            log.warning("Ignoring invalid private invite link for channel %r", channel_id)
+    return links
+
+
+async def _force_sub_join_link(client: Any, channel: Any,
+                               private_links: dict[str, str]) -> tuple[str | None, str]:
+    """Resolve public usernames and private invite URLs for force-sub channels.
+
+    `missing_subscriptions()` currently supplies channel identifiers. Public
+    usernames and numeric IDs are both accepted. A private numeric ID needs an
+    invite URL configured in AJ_FORCE_SUB_INVITE_LINKS.
+    """
+    value = str(channel).strip()
+    if not value:
+        return None, "required channel"
+
+    # An invite URL supplied directly by configuration can be used as-is.
+    if value.startswith(("https://t.me/+", "https://t.me/joinchat/")):
+        return value, "private channel"
+
+    # Accept public t.me links and @usernames.
+    if value.startswith("https://t.me/"):
+        return value, value.rstrip("/").rsplit("/", 1)[-1]
+    if value.startswith("@"):
+        value = value[1:]
+    if not value.lstrip("-").isdigit():
+        username = value.removeprefix("t.me/").strip("/")
+        if username and all(ch.isalnum() or ch == "_" for ch in username):
+            return f"https://t.me/{username}", f"@{username}"
+        return None, value or "required channel"
+
+    # Numeric ID: resolve public channels through Telegram when possible.
+    channel_id = value
+    try:
+        chat = await client.get_chat(int(channel_id))
+        if getattr(chat, "username", None):
+            return f"https://t.me/{chat.username}", f"@{chat.username}"
+    except Exception as exc:
+        log.debug("Could not resolve force-sub channel %s: %s", channel_id, type(exc).__name__)
+
+    # Private channels have no public username; use the administrator's invite URL.
+    invite_url = private_links.get(channel_id)
+    if invite_url:
+        return invite_url, "private channel"
+    return None, "private channel"
+
+
 def register_handlers(app: App, bot: Any, user_client: Any | None = None) -> None:
     from pyrogram import filters
     from pyrogram.handlers import CallbackQueryHandler, MessageHandler
@@ -125,10 +205,24 @@ def register_handlers(app: App, bot: Any, user_client: Any | None = None) -> Non
         try:
             miss = await app.delivery.missing_subscriptions(client, uid) if s.force_sub_channels else []
             if miss:
-                rows = [[(f"Join {c}", "url:https://t.me/ajapplications_tg")] for c in miss if not c.lstrip("-").isdigit()]
-                rows.append([("I joined — try again", "url:https://t.me/" + await username() + "?start=dl_" + token)])
-                return await msg.reply_text("Please join the required channel(s) first, then try again.",
-                                            reply_markup=to_markup(rows))
+                rows = []
+                private_links = _private_force_sub_links()
+
+                for channel in miss:
+                    join_url, label = await _force_sub_join_link(client, channel, private_links)
+                    if join_url:
+                        rows.append([(f"Join {label}"[:64], "url:" + join_url)])
+                    else:
+                        log.warning("No join URL available for required channel %r", channel)
+
+                rows.append([
+                    ("I joined — try again",
+                     "url:https://t.me/" + await username() + "?start=dl_" + token)
+                ])
+                message = "Please join the required channel(s) first, then try again."
+                if len(rows) == 1:
+                    message += "\n\nA channel invite link is not configured. Please contact the administrator."
+                return await msg.reply_text(message, reply_markup=to_markup(rows))
             note = await msg.reply_text("📤 Sending your file…")
             report = await app.delivery.deliver(client, token, uid)
         except DeliveryError as exc:
