@@ -1,0 +1,31 @@
+# AJ CINE AI — Koyeb deployment (https://app.koyeb.com)
+# Developed by AJ APPLICATIONS · Developer: AJWEYA
+#
+# 1. Push this repository to GitHub.
+# 2. Create an App -> Service -> GitHub -> select the repository.
+# 3. Builder: Dockerfile.   Exposed port: 8000 (HTTP).   Health check: HTTP GET /healthz
+# 4. Environment variables (use Koyeb Secrets for every credential):
+#      API_ID, API_HASH, BOT_TOKEN, OWNER_IDS,
+#      MONGO_URI      -> MongoDB Atlas connection string (Koyeb has no managed Mongo)
+#      REDIS_URL      -> Upstash/Redis Cloud URL (optional but recommended)
+#      OPENROUTER_API_KEY, OPENROUTER_MODEL, OPENROUTER_FALLBACK_MODELS   (free models only)
+#      WEB_SECRET_KEY, ADMIN_BOOTSTRAP_PASSWORD, WEB_SECURE_COOKIES=true
+#      TMDB_API_KEY (or TMDB_READ_TOKEN)   -> required: titles are identified through TMDB
+# 5. Persistence. Koyeb instance disks are ephemeral: a redeploy erases local backups (and legacy poster files).
+#    There is no movie database on disk any more, so a volume is optional: attach one at /app/data only if you
+#    want backups to survive redeploys (paid instances).
+# 6. Run a single instance (scale = 1): the bot and indexer must not run twice.
+#
+# Equivalent CLI (after `koyeb login`):
+#   koyeb app init ajcineai --git github.com/<you>/<repo> --git-branch main \
+#     --git-builder docker --ports 8000:http --routes /:8000 \
+#     --checks 8000:http:/healthz --min-scale 1 --max-scale 1 \
+#     --env PORT=8000 --env WEB_SECURE_COOKIES=true \
+#     --env API_ID=@API_ID --env API_HASH=@API_HASH --env BOT_TOKEN=@BOT_TOKEN   # @NAME = Koyeb secret
+app:
+  name: ajcineai
+service:
+  builder: dockerfile
+  port: 8000
+  health_check_path: /healthz
+  instances: 1
