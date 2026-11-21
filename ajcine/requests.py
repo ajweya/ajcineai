@@ -1,8 +1,4 @@
-"""Title requests: visitors ask for a movie or series that is not in the library; admins see the most wanted.
 
-One request per normalised title (+kind); repeat requests add a vote (one vote per visitor/user). Nothing is promised
-to the requester: an administrator marks a request done or declined.
-"""
 from __future__ import annotations
 
 import hashlib

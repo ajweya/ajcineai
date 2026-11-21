@@ -7,7 +7,7 @@ const HINTS = {
   maybe: "This file may not play in every browser. If it stalls, get it in Telegram.",
   poor: "This file format is unlikely to play in a browser. Get it in Telegram for the best result.",
 };
-let carry = null;          // position/playing state handed to the next page when the viewer switches version or episode
+let carry = null;          
 
 export async function watchPage(ctx) {
   const token = ctx.params[0], root = ctx.root;

@@ -1,10 +1,4 @@
-"""HTTP streaming of indexed Telegram files (for the website player).
 
-Bytes are fetched from Telegram on demand with pyrofork's `stream_media` (1 MiB chunks), aligned to the
-requested HTTP Range, and prefetched a few chunks ahead. Nothing is stored on disk. Written from the HTTP
-Range specification (RFC 9110 §14) and the pyrofork API. The overall design (signed URLs, block-aligned
-ranged reads, prefetching) is in the spirit of TG-FileStreamBot but shares no code with it.
-"""
 from __future__ import annotations
 
 import asyncio

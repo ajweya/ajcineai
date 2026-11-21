@@ -1,4 +1,3 @@
-"""Users, bans, permissions and administrator roles."""
 from __future__ import annotations
 
 import hashlib

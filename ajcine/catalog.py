@@ -1,10 +1,4 @@
-"""Catalog service: titles, seasons, episodes, files and their grouping.
 
-Hierarchy:  Series -> Seasons -> Episodes -> Languages -> Qualities -> Files
-Movies are titles with no seasons. Languages and qualities are never stored
-as a separate truth: they are always derived from real, non-deleted indexed
-files, so the UI can only ever offer what actually exists.
-"""
 from __future__ import annotations
 
 import hashlib

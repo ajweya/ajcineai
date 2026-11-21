@@ -2,7 +2,6 @@ import { $, esc, safeUrl, debounce, icon, watchImages } from "./ui.js";
 import { Site } from "./api.js";
 import { searches } from "./store.js";
 
-/** Expandable search: debounced live suggestions, recent searches, full keyboard support. */
 export function initSearch(go) {
   const form = $("#find"), input = $("#q"), box = $("#suggest"), toggle = $("#find-toggle");
   let items = [], sel = -1, ctl = null, open = false;

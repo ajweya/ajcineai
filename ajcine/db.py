@@ -1,4 +1,3 @@
-"""MongoDB connection, collection names and index definitions."""
 from __future__ import annotations
 
 import logging

@@ -1,4 +1,3 @@
-"""Process entrypoint: Mongo + cache + Telegram bot + web API + background workers."""
 from __future__ import annotations
 
 import asyncio

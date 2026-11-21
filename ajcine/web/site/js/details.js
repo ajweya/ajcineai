@@ -74,7 +74,7 @@ export async function titlePage(ctx) {
   const paintPlay = () => { const l = last(); playLabel.textContent = l && !l.done ? (l.meta.season != null ? `Continue ${epCode(l.meta.season, l.meta.episode)}` : "Continue watching") : "Play now"; };
   paintList(); paintPlay();
   listBtn.addEventListener("click", () => { const on = watchlist.toggle(t); paintList(); toast(on ? "Added to your watchlist" : "Removed from your watchlist"); });
-  $("#play").addEventListener("click", e => { e.currentTarget.disabled = true; playTitle(t, ctx.go).finally(() => { e.currentTarget.disabled = false; }); });
+  $("#play").addEventListener("click", e => { const b = e.currentTarget; b.disabled = true; playTitle(t, ctx.go).finally(() => { b.disabled = false; }); });
 
   /* versions & download */
   body.insertAdjacentHTML("beforeend", `<section class="section" id="vsec" aria-labelledby="vh"><div class="section-head"><h2 id="vh">Versions and download</h2></div><div id="vbox"></div>
@@ -107,10 +107,10 @@ export async function titlePage(ctx) {
       if (v) { picker.reset({ season: +v.dataset.s, episode: +v.dataset.vep }); $("#vh").textContent = `Versions: ${epCode(+v.dataset.s, +v.dataset.vep)}`; $("#vsec").scrollIntoView({ behavior: "smooth", block: "start" }); }
     });
     await loadEps(cur);
-    if (t.complete_pack) { /* the pack is selectable only through Telegram; see note */ }
+    if (t.complete_pack) { }
   }
 
-  /* similar titles: same kind, first genre, excluding this one */
+
   const g = (t.genres || [])[0];
   if (g) {
     Site.browseCached({ kind: t.kind, genre: g, sort: "rating" }).then(r => {

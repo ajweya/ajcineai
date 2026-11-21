@@ -27,7 +27,7 @@ function lazyGenres(ctx, host, genres, base) {
     try {
       const r = await Site.browseCached({ ...base, genre: g, sort: "rating" }); if (!ctx.live()) return;
       const items = r.items; const n = mountShelf(ctx, e.target, "g-" + g, esc(g), items, { more: `<a class="more" href="/browse?${new URLSearchParams({ ...(base.kind ? { kind: base.kind } : {}), genre: g })}" data-link>See all</a>` });
-      if (n) { e.target.replaceWith(...e.target.childNodes); }
+      if (n) { n.classList.remove("reveal"); e.target.replaceWith(...e.target.childNodes); }   // added after the scroll-reveal pass, so show it directly
     } catch { e.target.remove(); }
   }), { rootMargin: "600px 0px" });
   ctx.onLeave(() => io.disconnect());

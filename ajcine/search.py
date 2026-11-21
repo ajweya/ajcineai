@@ -1,11 +1,4 @@
-"""Search engine: exact, partial, fuzzy, typo/phonetic and AI-assisted search.
 
-Retrieval is index-backed (words, phonetic words and character trigrams are
-stored per title in `search_tokens`); ranking happens in-process with
-rapidfuzz. Only titles that currently have at least one real indexed file are
-returned. Results are cached in Redis keyed by a catalog version counter, so
-any catalog change invalidates them.
-"""
 from __future__ import annotations
 
 import logging

@@ -1,4 +1,3 @@
-"""Environment-driven configuration. No credentials live in source code."""
 from __future__ import annotations
 
 import os

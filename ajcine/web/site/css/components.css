@@ -69,7 +69,6 @@ a.chip:hover{border-color:#555;color:var(--text)}
 .bubble .say .trail{display:block;color:var(--text2);font-size:.85rem}
 .keys{display:grid;gap:6px}.keys+.keys{margin-top:6px}
 .keys.two{grid-template-columns:1fr 1fr}
-.keys.many{grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
 .key{font-weight:550;display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 12px;border:0;border-radius:var(--r);background:var(--elev);color:var(--text);cursor:pointer;text-align:center;transition:background-color var(--t-fast)}
 .key:hover{background:#2a2a2a;color:var(--text)}
 .key small{color:var(--text2)}
@@ -104,3 +103,8 @@ a.chip:hover{border-color:#555;color:var(--text)}
 .skel.btn-s{height:42px}.skel.line.m{width:40%}
 .spacer{height:var(--s5)}
 .nav-gap{height:calc(var(--nav-h) + 8px)}.nav-gap.lg{height:calc(var(--nav-h) + var(--s5))}
+
+/* quality / version keys: label above size, wide enough for text like "1012.24 MB" */
+.keys.many{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.keys.many .key{flex-direction:column;gap:2px;line-height:1.2;padding:8px}
+.keys.many .key small{font-size:.75rem;white-space:nowrap}

@@ -1,8 +1,3 @@
-"""Manual review and correction service (shared by the web API and Telegram panel).
-
-Every manual action is recorded permanently in `manual_corrections` and takes
-priority over automatic identification on all later indexing and re-indexing.
-"""
 from __future__ import annotations
 
 import hashlib

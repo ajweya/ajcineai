@@ -1,4 +1,3 @@
-"""Structured logging with an in-memory ring buffer the admin panels can read."""
 from __future__ import annotations
 
 import json

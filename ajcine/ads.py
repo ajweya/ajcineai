@@ -1,12 +1,4 @@
-"""Advertisements: managed by administrators, always labelled "Sponsored".
 
-An ad has a title, short text, an image URL (https, never downloaded or stored), a link and where it may appear:
-  bot_results   a "Sponsored" link button under search results
-  bot_delivery  a sponsored message (image + text + button) after a file is delivered
-  site_banner   a banner on the public website
-Impressions and clicks are counted per ad. Clicks go through `/go/ad/<id>` when PUBLIC_BASE_URL is set.
-Ads can be switched off for everyone at any time.
-"""
 from __future__ import annotations
 
 import random

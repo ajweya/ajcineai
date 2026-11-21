@@ -1,8 +1,4 @@
-"""TMDB API client and the poster service. Images are stored as URLs only; nothing is downloaded or saved to disk.
 
-This product uses the TMDB API but is not endorsed or certified by TMDB.
-Title identification lives in `matching/service.py` (it uses this client); this module also fills in artwork URLs.
-"""
 from __future__ import annotations
 
 import asyncio

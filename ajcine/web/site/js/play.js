@@ -3,8 +3,7 @@ import { progress } from "./store.js";
 import { toast } from "./ui.js";
 
 const busy = new Set();
-/** Start playback of a title: resumes the last-watched episode/version when there is one, otherwise the first episode (series)
- *  or the best browser-friendly version (movie). Opens the title page instead when streaming is off. */
+
 export async function playTitle(it, go, { season, episode } = {}) {
   if (busy.has(it.id)) return; busy.add(it.id);
   try {

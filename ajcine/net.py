@@ -1,4 +1,3 @@
-"""Small network helpers shared by the dashboard API and the public site."""
 from __future__ import annotations
 
 import re

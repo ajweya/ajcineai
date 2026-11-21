@@ -1,4 +1,3 @@
-"""Application container: builds and owns every service."""
 from __future__ import annotations
 
 import asyncio

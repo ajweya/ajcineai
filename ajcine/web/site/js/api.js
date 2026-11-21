@@ -1,4 +1,4 @@
-/* Typed access to the public API. The backend's response shapes are unchanged; adapters here shape them for the views. */
+
 const memo = new Map();
 export class ApiError extends Error { constructor(m, status) { super(m); this.status = status; } }
 

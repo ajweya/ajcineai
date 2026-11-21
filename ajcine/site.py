@@ -1,8 +1,4 @@
-"""Runtime switches for the public website and streaming.
 
-Environment variables give the defaults; administrators can flip them live from the dashboard
-(a kill switch for abuse or bandwidth problems) without a restart.
-"""
 from __future__ import annotations
 
 from typing import Any

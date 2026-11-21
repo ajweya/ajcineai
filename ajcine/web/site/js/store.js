@@ -19,7 +19,6 @@ export const watchlist = {
   clear() { write("watchlist", []); fire("watchlist"); },
 };
 
-/* history: one entry per title (latest episode/version watched); progress: position per exact item */
 export const progress = {
   key: (id, s, e) => `${id}:${s ?? ""}:${e ?? ""}`,
   all: () => read("progress", {}),

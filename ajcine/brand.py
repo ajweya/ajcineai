@@ -1,12 +1,11 @@
-"""Brand constants. Every user-facing surface reads credits from here."""
 
 PRODUCT = "AJ CINE AI"
-COMPANY = "AJ APPLICATIONS"
-DEVELOPER = "AJWEYA"
-VERSION = "1.0.0"
 
-CREDIT_LINE = f"Developed by {COMPANY}"
-DEVELOPER_LINE = f"Developer: {DEVELOPER}"
+
+VERSION = "2.5.0"
+
+CREDIT_LINE = f"Developed by AJ APPLICATIONS"
+DEVELOPER_LINE = f"Developer: Ahammed Ajmal S"
 FOOTER = f"{CREDIT_LINE} · {DEVELOPER_LINE}"
 
 ABOUT_TEXT = (

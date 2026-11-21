@@ -27,14 +27,18 @@ export function staggerIn(nodes, sc, delay = 0) {
 /** Reveal each `.reveal` section as it scrolls into view (batched, one observer for all). */
 export function revealOnScroll(root, sc, sel = ".reveal") {
   const nodes = [...root.querySelectorAll(sel)];
+  if (!nodes.length) return;
   if (!motionOn() || !window.ScrollTrigger) { nodes.forEach(n => { n.style.opacity = 1; n.style.transform = "none"; }); return; }
   sc.add(() => ScrollTrigger.batch(nodes, {
     start: "top 92%", once: true,
     onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: .6, ease: "power2.out", stagger: .08, clearProps: "transform" }),
   }));
+  const t = setTimeout(() => { try { ScrollTrigger.refresh(); } catch { /* page already left */ } }, 900);   // positions shift as artwork and shelves settle
+  sc.add(() => () => clearTimeout(t));
 }
 export function heroIntro(root, sc) {
   const items = [...root.querySelectorAll("[data-intro]")];
+  if (!items.length) return null;
   if (!motionOn()) { items.forEach(n => { n.style.opacity = 1; n.style.transform = "none"; }); return null; }
   let tl; sc.add(() => { tl = gsap.timeline({ defaults: { ease: "power3.out" } }).fromTo(items, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: .7, stagger: .09, clearProps: "transform" }); });
   return tl;

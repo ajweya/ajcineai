@@ -1,11 +1,4 @@
-"""Private file delivery with secure, user-bound, expiring tokens.
 
-Flow: the user taps a quality button -> a token is created for THAT user ->
-Telegram opens the bot's private chat via t.me/<bot>?start=dl_<token> -> the
-bot validates the token (exists, not expired, same user, not over its use
-limit, user not banned/restricted) -> the actual indexed message is copied to
-the user. No fake URLs; the bytes come from Telegram.
-"""
 from __future__ import annotations
 
 import asyncio

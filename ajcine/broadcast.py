@@ -1,10 +1,4 @@
-"""Broadcasting to bot users and groups, plus the registry of groups the bot is in.
 
-Recipients are bot users (who started the bot, not banned, not blocked) and groups/supergroups where the bot is a
-member. Sending is paced (BROADCAST_RATE_PER_SECOND), honours flood waits, marks users who blocked the bot and
-groups that removed it, can be cancelled, and resumes after a restart from a stored cursor (a restart can repeat the
-last few messages). A test message can be sent to an administrator first.
-"""
 from __future__ import annotations
 
 import asyncio
