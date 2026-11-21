@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>AJ CINE AI · Admin</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div id="login" class="login hidden">
+  <form id="login-form" class="login-card" autocomplete="on">
+    <div class="brand-mark" aria-hidden="true">AJ</div>
+    <h1>AJ CINE AI</h1>
+    <p class="muted">Administration</p>
+    <label>Username<input name="username" autocomplete="username" required maxlength="64"></label>
+    <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="256"></label>
+    <p id="login-error" class="error" role="alert"></p>
+    <button class="btn primary" type="submit">Sign in</button>
+    <p class="credit">Developed by AJ APPLICATIONS · Developer: AJWEYA</p>
+  </form>
+</div>
+
+<div id="shell" class="shell hidden">
+  <aside class="side" id="side">
+    <div class="side-head">
+      <div class="brand-mark" aria-hidden="true">AJ</div>
+      <div><strong>AJ CINE AI</strong><span class="muted small">Admin console</span></div>
+    </div>
+    <nav id="nav" aria-label="Sections"></nav>
+    <div class="side-foot">
+      <div id="who" class="small muted"></div>
+      <button class="btn ghost small" id="logout">Sign out</button>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="btn ghost icon" id="menu" aria-label="Menu">☰</button>
+      <h2 id="page-title">Overview</h2>
+      <span id="top-status" class="pill"></span>
+    </header>
+    <main id="view" tabindex="-1"></main>
+    <footer class="foot">
+      <span>Developed by AJ APPLICATIONS</span><span>Developer: AJWEYA</span><span id="ver"></span>
+    </footer>
+  </div>
+</div>
+
+<dialog id="dlg"><form method="dialog" id="dlg-form"></form></dialog>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script src="/static/app.js" defer></script>
+</body>
+</html>
