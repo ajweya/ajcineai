@@ -380,8 +380,13 @@ def create_web_app(app: App) -> FastAPI:
         user = await current(request)
         if not user:
             raise HTTPException(401, "authentication required")
-        return {**user, "product": brand.PRODUCT, "company": brand.COMPANY, "developer": brand.DEVELOPER,
-                "version": brand.VERSION}
+        return {
+    **user,
+    "product": brand.PRODUCT,
+    "company": "AJ APPLICATIONS",
+    "developer": "Ahammed Ajmal S",
+    "version": brand.VERSION
+}
 
     # ---------------------------------------------------------------- overview
     @api.get("/api/stats")
