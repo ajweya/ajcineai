@@ -8,7 +8,7 @@
 ### AI-assisted Telegram movie and TV-series indexing, identification, catalogue and delivery platform
 
 **Developed by AJ APPLICATIONS**  
-**Developer: AJWEYA**
+**Developer: Ahammed Ajmal S**
 
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Web_API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
