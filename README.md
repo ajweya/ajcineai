@@ -354,7 +354,7 @@ mongodb://localhost:27017
 Replace the placeholder with the actual repository URL:
 
 ```powershell
-git clone <YOUR_GITHUB_REPOSITORY_URL> ajcineai
+git clone https://github.com/ajweya/ajcineai.git ajcineai
 cd ajcineai
 ```
 
@@ -454,7 +454,7 @@ sudo systemctl status mongod
 ### 4. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL> ajcineai
+git clone https://github.com/ajweya/ajcineai.git ajcineai
 cd ajcineai
 ```
 
@@ -537,7 +537,7 @@ The exact formula and service name depend on the MongoDB version and installatio
 ### 4. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL> ajcineai
+git clone https://github.com/ajweya/ajcineai.git ajcineai
 cd ajcineai
 ```
 
@@ -596,7 +596,7 @@ docker compose version
 ### 2. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL> ajcineai
+git clone https://github.com/ajweya/ajcineai.git ajcineai
 cd ajcineai
 ```
 
