@@ -1,4 +1,3 @@
-
 ::: {align="center"}
 # ◈ AJ CINE AI
 
