@@ -906,7 +906,26 @@ def create_web_app(app: App) -> FastAPI:
     # ---------------------------------------------------------------- public website
     from .public import build_public_router
     api.include_router(build_public_router(app))
-    api.mount("/assets", StaticFiles(directory=str(SITE)), name="site-assets")
+    ASSETS = SITE / "assets"
+
+if not SITE.is_dir():
+    raise RuntimeError(f"Website directory not found: {SITE}")
+
+if not (SITE / "index.html").is_file():
+    raise RuntimeError(f"Website index.html not found: {SITE / 'index.html'}")
+
+if not ASSETS.is_dir():
+    raise RuntimeError(f"Website assets directory not found: {ASSETS}")
+
+api.mount(
+    "/assets",
+    StaticFiles(
+        directory=str(ASSETS),
+        check_dir=True,
+        html=False
+    ),
+    name="site-assets"
+)
 
     async def site_page():
         cfg = await site_config(app)
