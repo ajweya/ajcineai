@@ -79,7 +79,7 @@ AJ CINE AI is designed to be self-hosted. You can run it directly on Windows, Li
 |---|---|
 | Project | AJ CINE AI |
 | Organisation | AJ APPLICATIONS |
-| Developer | AJWEYA |
+| Developer | Ahammed Ajmal S |
 | Runtime | Python 3.12 |
 | Web framework | FastAPI |
 | Telegram integration | Pyrogram |
