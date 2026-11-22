@@ -24,53 +24,68 @@
 <link rel="stylesheet" href="/assets/css/animations.css">
 <link rel="stylesheet" href="/assets/css/player.css">
 <link rel="stylesheet" href="/assets/css/responsive.css">
+<link rel="stylesheet" href="/assets/css/design.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="aj-nav" id="nav">
-  <nav class="navbar navbar-expand-lg" aria-label="Main">
-    <div class="container-fluid aj-gutter">
-      <a class="navbar-brand" href="/" data-link aria-label="AJ CINE AI home"><span class="mark" aria-hidden="true"></span><span class="brand-text">AJ CINE <b>AI</b></span></a>
-      <div class="nav-tools order-lg-3">
-        <form class="aj-search" id="find" role="search" action="/search" method="get" autocomplete="off">
-          <button class="icon-btn" type="button" id="find-toggle" aria-label="Open search" aria-expanded="false" aria-controls="q"><i class="bi bi-search"></i></button>
-          <label class="visually-hidden" for="q">Search movies and series</label>
-          <input id="q" name="q" type="search" placeholder="Titles, years, languages" maxlength="120" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list" tabindex="-1">
-          <div class="suggest" id="suggest" role="listbox" aria-label="Suggestions" hidden></div>
-        </form>
-        <div class="dropdown">
-          <button class="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Library menu"><i class="bi bi-person-circle"></i></button>
-          <ul class="dropdown-menu dropdown-menu-end aj-menu">
-            <li><a class="dropdown-item" href="/library?tab=continue" data-link><i class="bi bi-play-circle"></i>Continue watching</a></li>
-            <li><a class="dropdown-item" href="/library?tab=watchlist" data-link><i class="bi bi-bookmark"></i>Watchlist</a></li>
-            <li><a class="dropdown-item" href="/library?tab=history" data-link><i class="bi bi-clock-history"></i>History</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/settings" data-link><i class="bi bi-sliders"></i>Preferences</a></li>
-          </ul>
+  <nav class="aj-bar aj-gutter" aria-label="Main">
+    <a class="aj-brand" href="/" data-link aria-label="AJ CINE AI home"><span class="mark" aria-hidden="true"></span><span class="brand-text">AJ CINE <b>AI</b></span></a>
+    <ul class="tabs" role="list">
+      <li><a class="nav-link" href="/" data-link data-tab="home">Home</a></li>
+      <li><a class="nav-link" href="/movies" data-link data-tab="movies">Movies</a></li>
+      <li><a class="nav-link" href="/series" data-link data-tab="series">Series</a></li>
+      <li><a class="nav-link" href="/anime" data-link data-tab="anime">Anime</a></li>
+      <li><a class="nav-link" href="/library" data-link data-tab="library">My Library</a></li>
+    </ul>
+    <div class="nav-tools">
+      <form class="aj-search" id="find" role="search" action="/search" method="get" autocomplete="off">
+        <button class="icon-btn" type="button" id="find-toggle" aria-label="Open search" aria-expanded="false" aria-controls="q" data-tip="Search (/)"><i class="bi bi-search" aria-hidden="true"></i></button>
+        <label class="visually-hidden" for="q">Search movies and series</label>
+        <input id="q" name="q" type="text" inputmode="search" enterkeyhint="search" placeholder="Titles, years, languages" maxlength="120" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list" tabindex="-1" spellcheck="false">
+        <div class="suggest" id="suggest" role="listbox" aria-label="Suggestions" hidden></div>
+      </form>
+      <div class="aj-menu-wrap">
+        <button class="icon-btn avatar" type="button" data-menu aria-haspopup="menu" aria-expanded="false" aria-controls="libmenu" aria-label="Library menu"><i class="bi bi-person" aria-hidden="true"></i></button>
+        <div class="aj-menu" id="libmenu" role="menu" hidden>
+          <div class="aj-menu-h">My Library</div>
+          <a role="menuitem" href="/library?tab=continue" data-link><i class="bi bi-play-circle" aria-hidden="true"></i>Continue watching</a>
+          <a role="menuitem" href="/library?tab=watchlist" data-link><i class="bi bi-bookmark" aria-hidden="true"></i>Watchlist</a>
+          <a role="menuitem" href="/library?tab=history" data-link><i class="bi bi-clock-history" aria-hidden="true"></i>History</a>
+          <div class="aj-menu-sep" role="separator"></div>
+          <a role="menuitem" href="/settings" data-link><i class="bi bi-sliders" aria-hidden="true"></i>Preferences</a>
         </div>
-        <button class="navbar-toggler icon-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle menu"><i class="bi bi-list"></i></button>
       </div>
-      <div class="collapse navbar-collapse order-lg-2" id="navmenu">
-        <ul class="navbar-nav tabs">
-          <li class="nav-item"><a class="nav-link" href="/" data-link data-tab="home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/movies" data-link data-tab="movies">Movies</a></li>
-          <li class="nav-item"><a class="nav-link" href="/series" data-link data-tab="series">Series</a></li>
-          <li class="nav-item"><a class="nav-link" href="/anime" data-link data-tab="anime">Anime</a></li>
-          <li class="nav-item"><a class="nav-link" href="/library" data-link data-tab="library">My library</a></li>
-        </ul>
-      </div>
+      <button class="icon-btn only-sm" type="button" id="sheet-open" aria-label="Open menu" aria-expanded="false" aria-controls="sheet"><i class="bi bi-list" aria-hidden="true"></i></button>
     </div>
   </nav>
 </header>
+<div class="aj-sheet" id="sheet" aria-hidden="true">
+  <div class="aj-sheet-scrim" data-sheet-close></div>
+  <div class="aj-sheet-panel" role="dialog" aria-label="Menu">
+    <div class="aj-sheet-head"><span class="aj-brand"><span class="mark" aria-hidden="true"></span><span class="brand-text">AJ CINE <b>AI</b></span></span><button class="icon-btn" type="button" data-sheet-close aria-label="Close menu"><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
+    <nav class="aj-sheet-nav tabs" aria-label="Mobile">
+      <a class="nav-link" href="/" data-link data-tab="home">Home</a><a class="nav-link" href="/movies" data-link data-tab="movies">Movies</a><a class="nav-link" href="/series" data-link data-tab="series">Series</a><a class="nav-link" href="/anime" data-link data-tab="anime">Anime</a><a class="nav-link" href="/library" data-link data-tab="library">My Library</a><a class="nav-link" href="/settings" data-link>Preferences</a>
+    </nav>
+    <p class="aj-sheet-foot">AJ APPLICATIONS · Developer: Ahammed Ajmal S</p>
+  </div>
+</div>
 <main id="main" tabindex="-1"><div class="boot" aria-live="polite"><span class="mark mark-lg" aria-hidden="true"></span><span class="visually-hidden">Loading</span></div></main>
+<nav class="aj-dock" aria-label="Quick navigation">
+  <a class="nav-link" href="/" data-link data-tab="home"><i class="bi bi-house" aria-hidden="true"></i><span>Home</span></a>
+  <a class="nav-link" href="/movies" data-link data-tab="movies"><i class="bi bi-film" aria-hidden="true"></i><span>Movies</span></a>
+  <a class="nav-link" href="/series" data-link data-tab="series"><i class="bi bi-tv" aria-hidden="true"></i><span>Series</span></a>
+  <a class="nav-link" href="/anime" data-link data-tab="anime"><i class="bi bi-stars" aria-hidden="true"></i><span>Anime</span></a>
+  <a class="nav-link" href="/library" data-link data-tab="library"><i class="bi bi-collection-play" aria-hidden="true"></i><span>Library</span></a>
+</nav>
 <footer class="aj-foot">
   <div class="container-fluid aj-gutter">
     <div class="foot-grid">
-      <div><a class="navbar-brand" href="/" data-link><span class="mark" aria-hidden="true"></span><span class="brand-text">AJ CINE <b>AI</b></span></a>
+      <div><a class="aj-brand" href="/" data-link><span class="mark" aria-hidden="true"></span><span class="brand-text">AJ CINE <b>AI</b></span></a>
         <p class="muted small mt-2 mb-0">Search, discover and stream from one library.</p></div>
       <nav aria-label="Footer"><a href="/movies" data-link>Movies</a><a href="/series" data-link>Series</a><a href="/anime" data-link>Anime</a><a href="/library" data-link>My library</a><a href="/settings" data-link>Preferences</a></nav>
     </div>
-    <p class="foot-credit">Developed by AJ APPLICATIONS · Developer: AJWEYA</p>
+    <p class="foot-credit">Developed by AJ APPLICATIONS · Developer: Ahammed Ajmal S</p>
     <p class="foot-legal">Titles, ratings and artwork: this product uses the TMDB API but is not endorsed or certified by TMDB.</p>
   </div>
 </footer>
